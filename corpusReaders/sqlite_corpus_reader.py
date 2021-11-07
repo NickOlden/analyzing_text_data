@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class SqliteCorpusReader(object):
 
     def __init__(self, path):

@@ -1,10 +1,14 @@
 import nltk
-from collections import Counter
 from texts.text1 import txt
-from constants.gender import MALE, FEMALE, UNKNOWN, BOTH, MALE_WORDS, FEMALE_WORDS
+from collections import Counter
+from constants.gender import MALE_WORDS, FEMALE_WORDS
+from constants.gender import MALE, FEMALE, UNKNOWN, BOTH
 
 
 def parse_gender(text):
+    """
+    @text
+    """
     sentences = [
         [word.lower() for word in nltk.word_tokenize(sentence)]
         for sentence in nltk.sent_tokenize(text)
@@ -20,6 +24,9 @@ def parse_gender(text):
 
 
 def count_gender(sentences):
+    """
+    @sentences
+    """
     sents = Counter()
     words = Counter()
     for sentence in sentences:
@@ -30,6 +37,9 @@ def count_gender(sentences):
 
 
 def genderize(words):
+    """
+    @words
+    """
     mwlen = len(MALE_WORDS.intersection(words))
     fwlen = len(FEMALE_WORDS.intersection(words))
     if mwlen > 0 and fwlen == 0:
@@ -42,14 +52,5 @@ def genderize(words):
         return UNKNOWN
 
 
-def gen(i):
-    for x in range(i):
-        a = x * 2
-        print(f'gen: {a}')
-        yield a
-
-
 if __name__ == "__main__":
-    # parse_gender(txt)
-    for x in gen(3):
-        print(f'main: {x + 1}')
+    parse_gender(txt)
